@@ -1,13 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import {  Text, View } from 'react-native';
+import React, { useState } from 'react';
+import EmailScreen from '../components/Onboarding/EmailScreen';
+import OtpScreen from '../components/Onboarding/OtpScreen';
+import PasswordScreen from '../components/Onboarding/PasswordScreen';
+import Form from '../components/Onboarding/Form';
 
 export default function App() {
+const [steps, setSteps] = useState(1)
+const handleNext = () => {
+  setSteps(prevSteps => prevSteps + 1);
+};
+
   return (
-    <View >
-      <Text className="text-3xl bg-pink-900">Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+    {steps ===1 && <EmailScreen  handleNext={handleNext}/>}
+    {steps ===2 && <OtpScreen handleNext={handleNext} />}
+    {steps ===3 && <PasswordScreen  handleNext={handleNext}  />}
+    {steps ===4 && <Form  handleNext={handleNext} />}
+    
+    </>
   );
 }
-
 
